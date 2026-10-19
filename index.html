@@ -612,12 +612,12 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
       intro = `On cherche combien il faut enlever à ${a} pour arriver à ${c}. On part de ${a} sur la bande et on recule jusqu'à ${c}.`;
       jumps = jumpsDown(a, c); up = false;
     } else {
-      intro = `On cherche le nombre de départ. On fait le chemin inverse : on part du résultat ${c} et on avance de ${b}.`;
-      jumps = jumpsUp(c, c + b);
+      intro = `On cherche le nombre de départ : en reculant de ${b}, on doit arriver à ${c}. Ce nombre est ${c} + ${b} = ${ans}. On vérifie sur la bande : on part de ${ans} et on recule de ${b}.`;
+      jumps = jumpsDown(ans, c); up = false;
     }
     const sizes = jumps.map(j => Math.abs(j.to - j.from));
     if (q.op === "sub" && q.hole === 0) {
-      total = `On arrive à ${ans}. Le nombre caché est ${ans}. On vérifie : ${ans} − ${b} = ${c}.`;
+      total = `On arrive bien à ${c}. Le nombre caché est ${ans}, car ${ans} − ${b} = ${c}.`;
     } else {
       const sum = sizes.length > 1 ? `${sizes.join(" + ")} = ${ans}` : `${ans}`;
       total = `En tout, on a ${up ? "avancé" : "reculé"} de ${sum}. Le nombre caché est ${ans}.`;
